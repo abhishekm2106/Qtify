@@ -38,7 +38,7 @@ const CardElement = styled.div`
     }   
 `
 
-const Card = ({ name, image, likesOrFollows, isPlaylist }) => (
+const Card = ({ name, image, likesOrFollows, isPlaylist }) =>
     <CardElement>
         <div className="card">
             <div className='image' style={{ backgroundImage: `url(${image})` }}></div>
@@ -50,6 +50,6 @@ const Card = ({ name, image, likesOrFollows, isPlaylist }) => (
             {name}
         </h3>
     </CardElement>
-)
+
 
 export default Card

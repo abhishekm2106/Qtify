@@ -4,10 +4,10 @@ import { FlexBox } from './components/Styles'
 import styled from 'styled-components'
 import Headphones from './assets/vibrating-headphone.png'
 import Card from './components/Card'
+import { useEffect, useState } from 'react'
+import axios from 'axios'
 
-function App() {
-
-  const HeroSection = styled(FlexBox)`
+const HeroSection = styled(FlexBox)`
     padding: 4rem 3rem;
     text-align: center;
     justify-content: center;
@@ -19,6 +19,21 @@ function App() {
     }
   `
 
+const CardList = styled.div`
+    display: grid;
+    gap:1rem;
+    grid-template-columns: repeat(auto-fill, minmax(186px, auto));
+    /* overflow-x: scroll;
+    overflow-y: hidden; */
+    padding: 1rem;
+  `
+
+
+function App() {
+  const [topAlbums, setTopAlbums] = useState([])
+  useEffect(() => {
+    axios.get('https://qtify-backend-labs.crio.do/albums/top').then(response => setTopAlbums(response.data))
+  }, [])
   return (
     <>
       <Navbar />
@@ -29,12 +44,20 @@ function App() {
         </h1>
         <img src={Headphones} alt="" />
       </HeroSection>
-      <Card
-        name='Strident Analyst'
-        image="https://images.pexels.com/photos/1047442/pexels-photo-1047442.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=800"
-        isPlaylist={true}
-        likesOrFollows={345}
-      />
+      <CardList>
+        {
+          topAlbums.map(a =>
+            <Card
+              name={a.title}
+              image={a.image}
+              isPlaylist={a.songs ? true : false}
+              likesOrFollows={a.follows}
+              key={a.id}
+            />
+          )
+        }
+      </CardList>
+
     </>
   )
 }
