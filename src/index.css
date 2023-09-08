@@ -1,0 +1,19 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background-color: #121212;
+  color: #FFFFFF;
+}
+
+
+button {
+  border-radius: 8px;
+  border: none;
+  padding: .5rem;
+  cursor: pointer;
+}
